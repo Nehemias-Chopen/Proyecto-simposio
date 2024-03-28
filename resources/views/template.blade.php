@@ -6,8 +6,10 @@
   @vite('resources/css/app.css')
   
 </head>
-<body>
+<body class="min-h-[100vh] flex justify-center items-center flex-col ">
   @yield('content')
-  
+  <footer class="w-full">
+    <img src="{{ asset('/img/Fogata.svg') }}" alt="Imagen Fogata" class="w-full object-cover">
+  </footer>
 </body>
 </html>
