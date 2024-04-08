@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('gestiones');
 });
+
+Route::get('/preRegistro', function(){
+    return view('preRegistro');
+});
