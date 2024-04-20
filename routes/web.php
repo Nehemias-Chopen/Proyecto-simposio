@@ -36,3 +36,7 @@ route::get('/login', function(){
 route::get('/moduloDisponible', function(){
     return view('moduloDisponible');
 });
+
+route::get('/gestionEntradas', function(){
+    return view('gestionEtradas');
+});

@@ -15,6 +15,6 @@
     }
 
     .size-floating-property {
-        @apply w-[90%] md:w-[60%] m-auto;
+        @apply w-[90%] md:w-[60%] m-auto flex justify-center items-center;
     }
 }
