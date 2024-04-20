@@ -28,3 +28,7 @@ Route::get('/registroInscripcion', function(){
 route::get('/detallesPago', function(){
     return view('detallesPago');
 });
+
+route::get('/login', function(){
+    return view('login');
+});
