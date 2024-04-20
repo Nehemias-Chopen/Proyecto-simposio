@@ -21,7 +21,10 @@ Route::get('/preRegistro', function(){
     return view('preRegistro');
 });
 
-
 Route::get('/registroInscripcion', function(){
     return view('registroInscripcion');
+});
+
+route::get('/detallesPago', function(){
+    return view('detallesPago');
 });
