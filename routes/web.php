@@ -20,3 +20,8 @@ Route::get('/', function () {
 Route::get('/preRegistro', function(){
     return view('preRegistro');
 });
+
+
+Route::get('/registroInscripcion', function(){
+    return view('registroInscripcion');
+});
