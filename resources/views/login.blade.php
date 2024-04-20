@@ -1,8 +1,8 @@
 @extends('template')
 
 @section('content')
-    <div class="m-auto">
-      <div class="w-[80%] lg:w-[30rem] flex flex-col gap-10 px-4 py-6 md:p-10 lg:p-12 shadow-md rounded-xl bg-white m-10 lg:m-16">
+    <div class="size-floating-property">
+      <div class="floating-background-property">
         <h2 class="text-xl lg:text-2xl font-semibold text-center">Login</h2>
         
         <div class="flex flex-col gap-5">

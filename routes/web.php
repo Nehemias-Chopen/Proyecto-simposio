@@ -32,3 +32,7 @@ route::get('/detallesPago', function(){
 route::get('/login', function(){
     return view('login');
 });
+
+route::get('/moduloDisponible', function(){
+    return view('moduloDisponible');
+});

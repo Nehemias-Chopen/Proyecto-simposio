@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .btn-primary {
+        @apply py-2 px-3 rounded-full bg-sky-900 text-white text-sm font-bold active:bg-sky-950 hover:bg-sky-700 hover:text-white;
+    }
+    .btn-secondary {
+        @apply border border-slate-800 py-2 px-3 rounded-full text-sm font-bold active:bg-slate-800 hover:bg-slate-500 hover:text-white;
+    }
+
+    .floating-background-property {
+        @apply w-[90%] lg:w-[30rem] m-auto flex flex-col gap-10 px-4 py-6 md:p-10 lg:p-12 shadow-md rounded-xl bg-white lg:m-16;
+    }
+
+    .size-floating-property {
+        @apply w-[90%] md:w-[60%] m-auto;
+    }
+}
