@@ -6,7 +6,7 @@
         <div>
           <button class="border border-slate-800 py-2 px-3 rounded-full text-sm font-bold active:bg-slate-800 hover:bg-slate-500 hover:text-white">Volver</button>
         </div>
-         <h2 class="text-xl lg:text-2xl font-semibold text-center">Comprobacion de Boleta</h2>
+         <h2 class="text-xl lg:text-2xl font-semibold text-center">Comprobacion de Boleta Administrador</h2>
          <div class="max-w-[50rem] overflow-x-scroll overflow-y-scroll max-h-[35vh] lg:max-w-full overflow-hidden p-2">
           <table class=" bg-slate-200 min-w-[28rem] w-full rounded-lg border border-slate-400 ">
             <thead>

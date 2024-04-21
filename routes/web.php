@@ -39,12 +39,12 @@ route::get('/moduloDisponible', function(){
 
 route::get('/gestionEntradas', function(){
     return view('gestionEtradas');
-});
+})->name('gestionEntradas');
 
 route::get('/comprobarBoleta', function(){
     return view('comprobarBoleta');
-});
+})->name('comprobarBoleta');
 
 route::get('/administrador', function(){
     return view('administrador');
-});
+})->name('administrador');
