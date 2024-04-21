@@ -40,3 +40,7 @@ route::get('/moduloDisponible', function(){
 route::get('/gestionEntradas', function(){
     return view('gestionEtradas');
 });
+
+route::get('/comprobarBoleta', function(){
+    return view('comprobarBoleta');
+});
