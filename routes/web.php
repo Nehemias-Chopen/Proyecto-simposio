@@ -44,3 +44,7 @@ route::get('/gestionEntradas', function(){
 route::get('/comprobarBoleta', function(){
     return view('comprobarBoleta');
 });
+
+route::get('/administrador', function(){
+    return view('administrador');
+});
