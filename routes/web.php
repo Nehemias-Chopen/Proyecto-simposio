@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SuveniresController;
 use App\Http\Controllers\SimposioController;
@@ -66,3 +67,7 @@ Route::get('/comprobarBoleta', [AuthController::class, 'comprobarBoleta'])->name
 route::get('/detallesPago', function(){
     return view('detallesPago');
 });
+
+/*-----------Rutas usadas en el modulo crear pdf-------------------*/
+Route::get('/generarPDF', [PDFController::class, 'generarPDF'])->name('generarPDF');
+

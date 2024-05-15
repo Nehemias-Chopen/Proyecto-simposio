@@ -53,26 +53,18 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="flex gap-7 lg:gap-4">
-                        <span class="font-bold">
-                            subtotal
-                        </span>
-                        <div class="">
-                            <span class="w-16 border border-black py-2 px-3 rounded-full">
-                                Q. 380.00
-                            </span>
-                        </div>
+
+                    <div class="pt-5 flex justify-center lg:justify-end gap-5">
+                        <button
+                            class="border border-slate-800 py-2 px-3 rounded-full text-sm font-bold active:bg-slate-800 hover:bg-slate-500 hover:text-white"><a
+                                href="{{ route('gestiones') }}">anterior</a></button>
+                       <a href="{{ route('generarPDF') }}" class="py-2 px-3 rounded-full bg-sky-900 text-white text-sm font-bold active:bg-sky-950 hover:bg-sky-700 hover:text-white">
+    siguiente
+</a>
+
                     </div>
                 </div>
-                <div class="pt-5 flex justify-center lg:justify-end gap-5">
-                    <button
-                        class="border border-slate-800 py-2 px-3 rounded-full text-sm font-bold active:bg-slate-800 hover:bg-slate-500 hover:text-white"><a
-                            href="{{ route('gestiones') }}">anterior</a></button>
-                    <button
-                        class="py-2 px-3 rounded-full bg-sky-900 text-white text-sm font-bold active:bg-sky-950 hover:bg-sky-700 hover:text-white">siguiente</button>
-                </div>
-            </div>
 
+            </div>
         </div>
-    </div>
-@endsection
+    @endsection
