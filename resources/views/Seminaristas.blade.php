@@ -16,6 +16,11 @@
                             href="{{ route('registroSeminarista') }}">Nuevo</a></button>
                 </div>
             </div>
+            @if (session('success'))
+                <div id="successMessage" class="bg-green-200 text-green-800 p-3 mb-4 rounded-md">
+                    {{ session('success') }}
+                </div>
+            @endif
             <h2 class="text-xl lg:text-2xl font-semibold text-center">Seminaristas</h2>
             <div class="max-w-[50rem] overflow-x-scroll overflow-y-scroll max-h-[35vh] lg:max-w-full overflow-hidden p-2">
                 <table class=" bg-slate-200 min-w-[28rem] w-full rounded-lg border border-slate-400 ">
@@ -39,8 +44,8 @@
                                 <td>
                                     <button
                                         class="py-2 px-2 rounded-full bg-yellow-500 text-white text-sm font-bold active:bg-yellow-600 hover:bg-yellow-400 hover:text-white">
-                                        <a href="#"><img src="{{ asset('/img/editar.png') }}" class="w-5"
-                                                alt=""></a>
+                                        <a href="{{ route('editarSeminarista', $seminarista->id_seminarista) }}"><img
+                                                src="{{ asset('/img/editar.png') }}" class="w-5" alt=""></a>
                                     </button>
                                 </td>
                                 <td>
@@ -73,4 +78,11 @@
             </div>
         </div>
     </div>
+    <script>
+        setTimeout(function() {
+            var element = document.getElementById('successMessage');
+            if (element)
+                element.style.display = 'none';
+        }, 5000); // 5000 milisegundos = 5 segundos
+    </script>
 @endsection

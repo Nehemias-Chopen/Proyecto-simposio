@@ -46,15 +46,20 @@ Route::get('/ingresarSuvenir', [AuthController::class, 'ingresarSuvenir'])->name
 Route::middleware('auth')->get('/suvenires', [SuveniresController::class, 'select'])->name('suvenires');
 Route::middleware('auth')->post('/ingresarSuvenir', [SuveniresController::class, 'register'])->name('registroSuvenir');
 Route::delete('/suvenires/{id}', [SuveniresController::class, 'eliminar'])->name('eliminarSuvenir');
+Route::get('/actualizarSuvenir/{suvenir}', [SuveniresController::class, 'editar'])->name('editarSuvenir');
+Route::put('/actualizarSuvenir/{suvenir}', [SuveniresController::class, 'actualizar'])->name('actualizarSuvenir');
 
 /*-----------Rutas usadas en el modulo simposio-------------------*/
-Route::middleware('auth')->get('/simposio', [SimposioController::class, 'select'])->name('simposio');
+Route::get('/actualizarSimposio/{simposio}', [SimposioController::class, 'editar'])->name('simposio');
+Route::put('/actualizarSimposio/{simposio}', [SimposioController::class, 'actualizar'])->name('actualizarSimposio');
 
 /*-----------Rutas usadas en el modulo Seminaristas-------------------*/
 Route::get('/registroSeminarista', [AuthController::class, 'registroSeminarista'])->name('registroSeminarista');
 Route::middleware('auth')->get('/seminaristas', [SeminaristaController::class, 'select'])->name('seminaristas');
 Route::middleware('auth')->post('/registroSeminarista', [SeminaristaController::class, 'register'])->name('registroSeminarista');
 Route::delete('/seminaristas/{id_seminarista}', [SeminaristaController::class, 'eliminar'])->name('eliminarSeminarista');
+Route::get('/actualizarSeminarista/{seminarista}', [SeminaristaController::class, 'editar'])->name('editarSeminarista');
+Route::put('/actualizarSeminarista/{seminarista}', [SeminaristaController::class, 'actualizar'])->name('actualizarSeminarista');
 
 /*-----------Rutas usadas en el modulo Comprobar Boletas-------------------*/
 Route::get('/comprobarBoleta', [AuthController::class, 'comprobarBoleta'])->name('comprobarBoleta');

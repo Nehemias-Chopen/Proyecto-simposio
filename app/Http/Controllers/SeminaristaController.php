@@ -25,4 +25,40 @@ class SeminaristaController extends Controller
 
         return redirect()->back();
     }
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function editar( Seminarista $seminarista)
+    {
+        return view('actualizarSeminarista', ['seminarista' => $seminarista]);
+    }
+
+    public function actualizar(Request $request, Seminarista $seminarista)
+    {
+        $validated = $request->validate([
+            'nombres' => 'required',
+            'apellidos' => 'required',
+            'tema' => 'required',
+            'telefono' => 'required',
+            'viaticos' => 'required|numeric',
+            'hoja_vida' => 'required',
+        ]);
+
+        // Elimina las claves de $validated que estén vacías (excepto el token CSRF)
+        $validated = array_filter($validated, function ($value, $key) {
+            return $value !== null && $key !== '_token';
+        }, ARRAY_FILTER_USE_BOTH);
+
+        // Actualiza los datos del seminarista si hay cambios
+        if (!empty($validated)) {
+            $seminarista->update($validated);
+            return redirect()->route('seminaristas')->with('success', 'Seminarista actualizado');
+        } else {
+            return redirect()->route('seminaristas')->with('info', 'No se realizaron cambios');
+        }
+    }
+
 }

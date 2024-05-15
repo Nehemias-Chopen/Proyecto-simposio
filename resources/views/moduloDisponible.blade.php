@@ -14,12 +14,12 @@
 
             <div class="flex flex-col gap-3">
                 <div class="flex gap-2 flex-col lg:flex-row pt-3 justify-between">
-                    <p class="flex  lg:items-center">Simposio - ACTUALIZAR PENDIENTE</p>
-                    <a href="{{ route('simposio') }}" class="btn-primary"> Siguiente </a>
+                    <p class="flex  lg:items-center">Simposio</p>
+                    <a href="{{ route('simposio', 1) }}" class="btn-primary"> Siguiente </a>
                 </div>
 
                 <div class="flex gap-2 flex-col lg:flex-row pt-3 justify-between">
-                    <p class="flex  lg:items-center">Suvenires - BOTON EDITAR PENDIENTE</p>
+                    <p class="flex  lg:items-center">Suvenires</p>
                     <a href="{{ route('suvenires') }}" class="btn-primary"> Siguiente </a>
                 </div>
 
@@ -32,7 +32,7 @@
                     <a href="{{ route('comprobarBoleta') }}" class="btn-primary"> Siguiente </a>
                 </div>
                 <div class="flex gap-2 flex-col lg:flex-row pt-3 justify-between">
-                    <p class="flex lg:items-center">Seminaristas - BOTON EDITAR PENDIENTE</p>
+                    <p class="flex lg:items-center">Seminaristas</p>
                     <a href="{{ route('seminaristas') }}" class="btn-primary"> Siguiente </a>
                 </div>
                 <div class="flex gap-2 flex-col lg:flex-row pt-3 justify-between">

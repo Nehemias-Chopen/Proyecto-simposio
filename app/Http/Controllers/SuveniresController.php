@@ -25,4 +25,27 @@ class SuveniresController extends Controller
 
         return redirect()->back();
     }
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function editar( Suvenires $suvenir)
+    {
+        return view('actualizarSuvenir', ['suvenir' => $suvenir]);
+    }
+
+    public function actualizar(Request $request, Suvenires $suvenir)
+    {
+        $validated = $request->validate([
+            'nombre' => 'required',
+            'precio' => 'required|numeric',
+        ]);
+
+        // Actualiza los datos del suvenir
+        $suvenir->update($validated);
+        return redirect()->route('suvenires')->with('success', 'Suvenir actualizado');
+    }
+
 }
