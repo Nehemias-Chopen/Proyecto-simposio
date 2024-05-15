@@ -17,6 +17,7 @@ return new class extends Migration
             $table->decimal('total', 10, 2);
             $table->string('estado', 100);
             $table->string('imagen', 300)->nullable();
+            $table->string('suvenir', 250);
             $table->timestamps();
 
             $table->foreign('estudiante')->references('carnet')->on('alumnos');

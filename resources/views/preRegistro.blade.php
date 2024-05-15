@@ -5,77 +5,112 @@
         <div
             class="w-[20rem] lg:w-[50rem] flex flex-col gap-10 px-4 py-6 md:p-10 lg:p-12 shadow-md rounded-xl bg-white lg:m-16">
             <h2 class="text-xl lg:text-2xl font-semibold text-center"> Pre Registro</h2>
-            <div class="flex flex-col gap-4">
-                <div class="flex">
-                    <p class="hidden lg:w-20 lg:flex lg:items-center">Nombre</p>
-                    <input type="text" placeholder="Nombre" name="nombre"
-                        class="w-full lg:w-60 placeholder:text-sm focus:outline-none bg-slate-200 py-2 px-3 rounded-full">
-                </div>
-                <div class="flex">
-                    <p class="hidden lg:w-20 lg:flex lg:items-center">Carne</p>
-                    <input type="text" placeholder="Carne" name="carnet"
-                        class="w-full lg:w-60 placeholder:text-sm focus:outline-none bg-slate-200 py-2 px-3 rounded-full">
-                </div>
-                <div class=" relative lg:flex">
-                    <p class="hidden lg:w-20 lg:flex lg:items-center">Semestre</p>
-                    <input type="text" placeholder="Semestre" name="Semestre"
-                        class="w-full lg:w-60 placeholder:hidden lg:placeholder:flex lg:placeholder:text-sm lg:focus:outline-none bg-slate-200 py-2 px-3 rounded-full">
-                </div>
-                <div class="flex">
-                    <p class="hidden lg:w-20 lg:flex lg:items-center">Telefono</p>
-                    <input type="text" placeholder="Telefono"
-                        class="w-full lg:w-60 placeholder:text-sm focus:outline-none bg-slate-200 py-2 px-3 rounded-full">
-                </div>
-                @foreach ($simposio as $simposio)
-                    <div class="flex lg:py-5 gap-5 lg:gap-10">
-                        <span class="font-bold">Inscripcion</span>
-                        <span>Q.{{ $simposio->costo }}</span>
+            <form method="POST" action="">
+                @csrf
+                <div class="flex flex-col gap-4">
+                    <div class="flex">
+                        <p class="hidden lg:w-20 lg:flex lg:items-center">Nombre</p>
+                        <input type="text" placeholder="Nombre" name="nombre"
+                            class="w-full lg:w-60 placeholder:text-sm focus:outline-none bg-slate-200 py-2 px-3 rounded-full">
                     </div>
-                @endforeach
-                <div class="flex flex-col lg:flex-row gap-5 lg:gap-10">
-                    <span class="">Seleccione la talla de la playera</span>
-                    <select name="" id=""
-                        class="py-2 px-3 rounded-full bg-slate-200 w-20 text-sm font-bold">
-                        <option value="">S</option>
-                        <option value="">M</option>
-                        <option value="">L</option>
-                    </select>
-                </div>
-
-                <div class="flex w-full flex-col lg:flex-row gap-5 lg:flex lg:justify-between lg:items-end">
-                    <div>
-                        <h3 class="font-bold text-lg">Añade suavenirs</h3>
-                        @foreach ($suvenir as $suvenir)
-                            <div>
-                                <input type="checkbox" name="" id="" class="accent-sky-900">
-                                <span class="font-bold">{{ $suvenir->nombre }}</span>
-                                <span>+ Q.{{ $suvenir->precio }}</span>
-                            </div>
-                        @endforeach
+                    <div class="flex">
+                        <p class="hidden lg:w-20 lg:flex lg:items-center">Carne</p>
+                        <input type="text" placeholder="Carne" name="carnet"
+                            class="w-full lg:w-60 placeholder:text-sm focus:outline-none bg-slate-200 py-2 px-3 rounded-full">
                     </div>
-                    <div class="flex gap-7 lg:gap-4">
-                        <span class="font-bold">
-                            subtotal
-                        </span>
-                        <div class="">
-                            <span class="w-16 border border-black py-2 px-3 rounded-full">
-                                Q. 380.00
-                            </span>
+                    <div class=" relative lg:flex">
+                        <p class="hidden lg:w-20 lg:flex lg:items-center">Semestre</p>
+                        <input type="text" placeholder="Semestre" name="Semestre"
+                            class="w-full lg:w-60 placeholder:hidden lg:placeholder:flex lg:placeholder:text-sm lg:focus:outline-none bg-slate-200 py-2 px-3 rounded-full">
+                    </div>
+                    <div class="flex">
+                        <p class="hidden lg:w-20 lg:flex lg:items-center">Telefono</p>
+                        <input type="text" placeholder="Telefono"
+                            class="w-full lg:w-60 placeholder:text-sm focus:outline-none bg-slate-200 py-2 px-3 rounded-full">
+                    </div>
+                    @foreach ($simposio as $simposio)
+                        <div class="flex lg:py-5 gap-5 lg:gap-10">
+                            <span class="font-bold">Inscripcion</span>
+                            <span data-costo="{{ $simposio->costo }}">Q.{{ $simposio->costo }}</span>
                         </div>
-                    </div>
-                </div>
-                <div class="pt-5 flex justify-center lg:justify-end gap-5">
-                    <button
-                        class="border border-slate-800 py-2 px-3 rounded-full text-sm font-bold active:bg-slate-800 hover:bg-slate-500 hover:text-white"><a
-                            href="{{ route('gestiones') }}">anterior</a></button>
-                    <a href="{{ route('generarPDF') }}"
-                        class="py-2 px-3 rounded-full bg-sky-900 text-white text-sm font-bold active:bg-sky-950 hover:bg-sky-700 hover:text-white">
-                        siguiente
-                    </a>
+                        <div class="flex lg:py-5 gap-5 lg:gap-10">
+                            <span class="font-bold">Suvenir:</span>
+                            <span>Playera</span>
+                            <select name="suvenir" class="py-2 px-3 rounded-full bg-slate-200 text-sm font-bold">
+                                <option value="" disabled selected>Elija una talla</option>
+                                <option value="Playera talla = S">S</option>
+                                <option value="Playera talla = M">M</option>
+                                <option value="Playera talla = L">L</option>
+                            </select>
+                        </div>
 
-                </div>
-            </div>
+                        <div class="flex w-full flex-col lg:flex-row gap-5 lg:flex lg:justify-between lg:items-end">
+                            <div>
+                                <h3 class="font-bold text-lg">Añade suavenirs</h3>
+                                @foreach ($suvenir as $item)
+                                    <div>
+                                        <input type="checkbox" name="suvenir[]" class="accent-sky-900"
+                                            value="{{ $item->id }}" data-costo="{{ $item->precio }}">
+                                        <span class="font-bold">{{ $item->nombre }}</span>
+                                        <span>+ Q.{{ $item->precio }}</span>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="flex w-full flex-col lg:flex-row gap-5 lg:flex lg:justify-between lg:items-end">
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    // Obtener todos los checkboxes
+                                    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
+                                    // Escuchar el evento de cambio en cada checkbox
+                                    checkboxes.forEach(function(checkbox) {
+                                        checkbox.addEventListener('change', function() {
+                                            // Obtener el costo del simposio asociado a este checkbox
+                                            const costoSimposio = parseFloat(this.dataset.costo);
+
+                                            // Obtener la suma actual
+                                            let sumaTotal = parseFloat(document.getElementById('sumaTotal').textContent);
+
+                                            // Actualizar la suma total basada en si el checkbox está marcado o no
+                                            if (this.checked) {
+                                                sumaTotal += costoSimposio;
+                                            } else {
+                                                sumaTotal -= costoSimposio;
+                                            }
+
+                                            // Actualizar el valor de la suma total en el HTML
+                                            document.getElementById('sumaTotal').textContent = sumaTotal.toFixed(2);
+                                        });
+                                    });
+                                });
+                            </script>
+
+                            <!-- Agregar un elemento para mostrar la suma total -->
+                            <div><span></span></div>
+                            <!-- Subtotal -->
+                            <div class="flex gap-7 lg:gap-4">
+                                <span class="font-bold">
+                                    subtotal
+                                </span>
+                                <div class="">
+                                    <span id="sumaTotal" class="w-16 border border-black py-2 px-3 rounded-full">
+                                        {{ $simposio->costo }}
+                                    </span>
+                                </div>
+                    @endforeach
+                </div>
         </div>
+
+        <div class="pt-5 flex justify-center lg:justify-end gap-5">
+            <button
+                class="border border-slate-800 py-2 px-3 rounded-full text-sm font-bold active:bg-slate-800 hover:bg-slate-500 hover:text-white"><a
+                    href="{{ route('gestiones') }}">anterior</a></button>
+            <button
+                class="py-2 px-3 rounded-full bg-sky-900 text-white text-sm font-bold active:bg-sky-950 hover:bg-sky-700 hover:text-white">siguiente</button>
+        </div>
+    </div>
+    </form>
+    </div>
     </div>
 @endsection

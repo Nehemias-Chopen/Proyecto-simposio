@@ -22,7 +22,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(PageController::class)->group(function (){
     Route::get('/', 'gestiones')->name('gestiones');
+    /*---------Routes usados en el modulo de preRegistro--------------------*/
     Route::get('/preRegistro', 'preRegistro')->name('preRegistro');
+    /*Route::get('/preRegistro', 'register')->name('ingresarRegistro');*/
+
+    /*---------Routes usados en el modulo de registroInscripcion-----------*/
     Route::get('/registroInscripcion',  'registroInscripcion')->name('registroInscripcion');
 });
 
@@ -70,4 +74,3 @@ route::get('/detallesPago', function(){
 
 /*-----------Rutas usadas en el modulo crear pdf-------------------*/
 Route::get('/generarPDF', [PDFController::class, 'generarPDF'])->name('generarPDF');
-

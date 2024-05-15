@@ -9,11 +9,13 @@ use App\Models\Simposio;
 
 class PageController extends Controller
 {
+
     public function gestiones()
     {
         return view('gestiones');
     }
 
+    /*---------funciones usadas en preRegistro--------------------*/
     public function preRegistro()
     {
         $suvenir = Suvenires::all();
@@ -21,6 +23,7 @@ class PageController extends Controller
         return view('preRegistro',  compact('suvenir', 'simposio'));
     }
 
+    /*---------Funciones usadas para registroInscripcion--------------------*/
     public function registroInscripcion()
     {
         return view('registroInscripcion');
