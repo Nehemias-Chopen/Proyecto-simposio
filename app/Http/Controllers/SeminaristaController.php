@@ -8,9 +8,21 @@ use App\Models\Seminarista;
 
 class SeminaristaController extends Controller
 {
-    public function select(){
-        $seminarista = Seminarista::all();
-        return view('Seminaristas',  compact('seminarista'));
+
+    public function select(Request $request){
+        $search = $request->input('search');
+
+        // Si hay un término de búsqueda, filtramos los usuarios
+        if ($search) {
+            $seminarista = Seminarista::where('nombres', 'like', "%$search%")
+                        ->orWhere('apellidos', 'like', "%$search%")
+                        ->get();
+        } else {
+            // Si no hay término de búsqueda, obtenemos todos los usuarios
+            $seminarista = Seminarista::all();
+        }
+
+        return view('Seminaristas', compact('seminarista'));
     }
 
     public function register(SeminaristaRequest $request){

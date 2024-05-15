@@ -8,9 +8,20 @@ use App\Models\Suvenires;
 
 class SuveniresController extends Controller
 {
-    public function select(){
-        $suvenir = Suvenires::all();
-        return view('suvenir',  compact('suvenir'));
+    public function select(Request $request){
+        $search = $request->input('search');
+
+        // Si hay un término de búsqueda, filtramos los usuarios
+        if ($search) {
+            $suvenir = Suvenires::where('codigo', 'like', "%$search%")
+                        ->orWhere('nombre', 'like', "%$search%")
+                        ->get();
+        } else {
+            // Si no hay término de búsqueda, obtenemos todos los usuarios
+            $suvenir = Suvenires::all();
+        }
+
+        return view('suvenir', compact('suvenir'));
     }
 
     public function register(SuvenirRequest $request){

@@ -13,9 +13,20 @@ class UserController extends Controller
         return redirect('/registroUser')->with('success','Se registro el usuario con exito');
     }
 
-    public function select(){
-        $user = User::all();
-        return view('administrador',  compact('user'));
+    public function select(Request $request){
+        $search = $request->input('search');
+
+        // Si hay un término de búsqueda, filtramos los usuarios
+        if ($search) {
+            $user = User::where('name', 'like', "%$search%")
+                        ->orWhere('email', 'like', "%$search%")
+                        ->get();
+        } else {
+            // Si no hay término de búsqueda, obtenemos todos los usuarios
+            $user = User::all();
+        }
+
+        return view('administrador', compact('user'));
     }
 
     public function eliminar($id)

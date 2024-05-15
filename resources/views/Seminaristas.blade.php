@@ -66,14 +66,16 @@
                 </table>
             </div>
             <div class="flex justify-center gap-1 pt-5 flex-col">
-                <h4 class="text-lg font-bold">Buscar Nombre</h4>
+                <h4 class="text-lg font-bold">Buscar</h4>
                 <div class="flex items-center gap-2">
-                    <input type="text" placeholder="Carne"
-                        class="w-full lg:w-60 placeholder:text-sm focus:outline-none bg-slate-200 py-2 px-3 rounded-full">
-                    <button
-                        class="py-2 px-2 rounded-full bg-sky-900 text-white text-sm font-bold active:bg-sky-950 hover:bg-sky-700 hover:text-white">
-                        <img src="{{ asset('/img/lupa.png') }}" class="w-5" alt="">
-                    </button>
+                    <form method="GET" action="{{ route('seminaristas', $seminarista) }}">
+                        <input type="text" placeholder="Buscar" name="search" value="{{ request('search') }}"
+                            class="w-full lg:w-60 placeholder:text-sm focus:outline-none bg-slate-200 py-2 px-3 rounded-full">
+                        <button
+                            class="py-2 px-2 rounded-full bg-sky-900 text-white text-sm font-bold active:bg-sky-950 hover:bg-sky-700 hover:text-white">
+                            <img src="{{ asset('/img/lupa.png') }}" class="w-5" alt="">
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
