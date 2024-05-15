@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PDFController extends Controller
+
+// modificar al aplicar la logica esto genera el pdf o factura 
 { public function generarPDF()
     {
         $datos = DB::table('suvenires')->get(); 
