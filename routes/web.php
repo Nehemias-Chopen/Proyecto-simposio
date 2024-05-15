@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\SuveniresController;
+use App\Http\Controllers\SimposioController;
+use App\Http\Controllers\SeminaristaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,38 +19,45 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('gestiones');
+Route::controller(PageController::class)->group(function (){
+    Route::get('/', 'gestiones')->name('gestiones');
+    Route::get('/preRegistro', 'preRegistro')->name('preRegistro');
+    Route::get('/registroInscripcion',  'registroInscripcion')->name('registroInscripcion');
 });
 
-Route::get('/preRegistro', function(){
-    return view('preRegistro');
-});
+/*---------Routes usados en el modulo de login--------------------*/
+Route::get('/login', [AuthController::class, 'index'])->name('admins');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/moduloDisponible', [AuthController::class, 'moduloDisponible'])->name('moduloDisponible');
+Route::get('/gestionEntradas', [AuthController::class, 'gestionEntradas'])->name('gestionEntradas');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/registroInscripcion', function(){
-    return view('registroInscripcion');
-});
+/*----------Routas usadas en el modulo de super usuario-----------*/
+Route::get('/registroUser', [AuthController::class, 'registroUser'])->name('registroUser');
+Route::middleware('auth')->get('/administrador', [UserController::class, 'select'])->name('administrador');
+Route::middleware('auth')->post('/registroUser', [UserController::class, 'register'])->name('registro');
+Route::delete('/administrador/{id}', [UserController::class, 'eliminar'])->name('eliminarUsuario');
+Route::get('/actualizarUsuario/{user}', [UserController::class, 'editar'])->name('editarUsuario');
+Route::put('/actualizarUsuario/{user}', [UserController::class, 'actualizar'])->name('actualizarUsuario');
+
+/*-----------Rutas usadas en el modulo suvenir-------------------*/
+Route::get('/ingresarSuvenir', [AuthController::class, 'ingresarSuvenir'])->name('ingresarSuvenir');
+Route::middleware('auth')->get('/suvenires', [SuveniresController::class, 'select'])->name('suvenires');
+Route::middleware('auth')->post('/ingresarSuvenir', [SuveniresController::class, 'register'])->name('registroSuvenir');
+Route::delete('/suvenires/{id}', [SuveniresController::class, 'eliminar'])->name('eliminarSuvenir');
+
+/*-----------Rutas usadas en el modulo simposio-------------------*/
+Route::middleware('auth')->get('/simposio', [SimposioController::class, 'select'])->name('simposio');
+
+/*-----------Rutas usadas en el modulo Seminaristas-------------------*/
+Route::get('/registroSeminarista', [AuthController::class, 'registroSeminarista'])->name('registroSeminarista');
+Route::middleware('auth')->get('/seminaristas', [SeminaristaController::class, 'select'])->name('seminaristas');
+Route::middleware('auth')->post('/registroSeminarista', [SeminaristaController::class, 'register'])->name('registroSeminarista');
+Route::delete('/seminaristas/{id_seminarista}', [SeminaristaController::class, 'eliminar'])->name('eliminarSeminarista');
+
+/*-----------Rutas usadas en el modulo Comprobar Boletas-------------------*/
+Route::get('/comprobarBoleta', [AuthController::class, 'comprobarBoleta'])->name('comprobarBoleta');
 
 route::get('/detallesPago', function(){
     return view('detallesPago');
 });
-
-route::get('/login', function(){
-    return view('login');
-});
-
-route::get('/moduloDisponible', function(){
-    return view('moduloDisponible');
-});
-
-route::get('/gestionEntradas', function(){
-    return view('gestionEtradas');
-})->name('gestionEntradas');
-
-route::get('/comprobarBoleta', function(){
-    return view('comprobarBoleta');
-})->name('comprobarBoleta');
-
-route::get('/administrador', function(){
-    return view('administrador');
-})->name('administrador');

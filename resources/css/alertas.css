@@ -1,0 +1,17 @@
+.alert {
+    border: 2px solid red;
+    /* Contorno rojo */
+    border-radius: 10px;
+    /* Bordes redondeados */
+    background-color: red;
+    /* Fondo rojo */
+    color: white;
+    /* Texto blanco */
+    padding: 10px;
+    /* Espaciado interior */
+}
+
+.text-center {
+    text-align: center;
+    /* Centrar el texto */
+}
