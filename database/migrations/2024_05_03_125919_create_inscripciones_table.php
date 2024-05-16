@@ -12,16 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('inscripciones', function (Blueprint $table) {
-            $table->id('no_boleta');
+            $table->id('no_boleta'); // Sin autoincremento
             $table->string('estudiante', 15);
             $table->decimal('total', 10, 2);
             $table->string('estado', 100);
             $table->string('imagen', 300)->nullable();
             $table->string('suvenir', 250);
             $table->timestamps();
-
             $table->foreign('estudiante')->references('carnet')->on('alumnos');
-        });
+    });
+
+            // Establecer el valor inicial de autoincremento después de crear la tabla
+        DB::statement("ALTER TABLE inscripciones AUTO_INCREMENT = 100;");
     }
 
     /**

@@ -5,20 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class alumnos extends Model
+class inscripciones extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'carnet',
-        'nombre',
-        'telefono',
-        'semestre',
+        'no_boleta',
+        'estudiante',
+        'total',
+        'estado',
+        'imagen',
+        'suvenir',
     ];
 
-    protected $primaryKey = 'carnet';
+    protected $primaryKey = 'no_boleta';
 
     public $incrementing = false;
 
     protected $keyType = 'string';
+
+    protected $casts = [
+        'total' => 'decimal:2',
+    ];
 }

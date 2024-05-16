@@ -24,7 +24,7 @@ Route::controller(PageController::class)->group(function (){
     Route::get('/', 'gestiones')->name('gestiones');
     /*---------Routes usados en el modulo de preRegistro--------------------*/
     Route::get('/preRegistro', 'preRegistro')->name('preRegistro');
-    /*Route::get('/preRegistro', 'register')->name('ingresarRegistro');*/
+    Route::post('/detallespreRegistro', 'register')->name('ingresarRegistro');
 
     /*---------Routes usados en el modulo de registroInscripcion-----------*/
     Route::get('/registroInscripcion',  'registroInscripcion')->name('registroInscripcion');

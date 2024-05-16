@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('no_boleta');
             $table->unsignedBigInteger('suvenir');
-            $table->text('Detalle')->nullable();
             $table->timestamps();
 
             $table->foreign('no_boleta')->references('no_boleta')->on('inscripciones');
