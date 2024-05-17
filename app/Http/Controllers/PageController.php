@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\alumnos;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use App\Models\Suvenires;
 use App\Models\Simposio;
 use App\Models\inscripciones;
+use Illuminate\Support\Facades\View;
+use App\Http\Controllers\PDFController;
 
 class PageController extends Controller
 {
@@ -23,6 +27,7 @@ class PageController extends Controller
         $simposio = Simposio::all();
         return view('preRegistro',  compact('suvenir', 'simposio'));
     }
+    
 
     public function register(Request $request){
         $request->validate([
@@ -50,17 +55,28 @@ class PageController extends Controller
             'imagen' => 'NULL',
             'suvenir' => $request->input('suvenirg'),
         ]);
-
-        return [
-            'alumno' => $alumno,
-            'inscripcion' => $inscripciones
-        ];
-    }
-
+       
+        try {
+            // genera un reporte del preRegistro
+            $pdf = Pdf::loadView('generarPDF', compact('alumno', 'inscripciones'));
+            // verificamos si no existe algun error al crear el pdf
+            return $pdf->stream('documento.pdf');
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al generar el PDF: ' . $e->getMessage()]);
+        }
+        
+        // return $pdf->stream('documento.pdf');
+        //return [$inscripciones,$alumno];
+        
+    }   
+    
     /*---------Funciones usadas para registroInscripcion--------------------*/
+   
     public function registroInscripcion()
     {
         return view('registroInscripcion');
     }
+
+
 
 }

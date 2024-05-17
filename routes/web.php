@@ -73,4 +73,5 @@ route::get('/detallesPago', function(){
 });
 
 /*-----------Rutas usadas en el modulo crear pdf-------------------*/
-Route::get('/generarPDF', [PDFController::class, 'generarPDF'])->name('generarPDF');
+//Route::get('/generarPDF', [PDFController::class, 'generarPDF'])->name('generarPDF');
+Route::get('/facturacion', [PageController::class, 'facturacion'])->name('facturacion');
