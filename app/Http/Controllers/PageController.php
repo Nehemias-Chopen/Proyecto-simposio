@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\alumnos;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use App\Models\suvenires;
 use App\Models\Simposio;
 use App\Models\inscripciones;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\DB;
 use App\Models\detalles_inscripcions;
+=======
+use Illuminate\Support\Facades\View;
+use App\Http\Controllers\PDFController;
+>>>>>>> 6ee76df95e423020c5a9f49fd06e7d98df737a0c
 
 class PageController extends Controller
 {
@@ -25,6 +32,7 @@ class PageController extends Controller
         $simposio = Simposio::all();
         return view('preRegistro',  compact('suvenir', 'simposio'));
     }
+    
 
     public function register(Request $request){
         /*---------------Validacion de los campos y comprovacion de que el carnet no este registrado */
@@ -55,6 +63,7 @@ class PageController extends Controller
             'imagen' => 'NULL',
             'suvenir' => $request->input('suvenirg'),
         ]);
+<<<<<<< HEAD
 
         /*se obtiene el codigo de la boleta por medio de busqueda del carnet del estudiante registrado */
             $carnet = $request->input('carnet');
@@ -77,14 +86,37 @@ class PageController extends Controller
         };
 }
 
+=======
+       
+        try {
+            // genera un reporte del preRegistro
+            $pdf = Pdf::loadView('generarPDF', compact('alumno', 'inscripciones'));
+            // verificamos si no existe algun error al crear el pdf
+            return $pdf->stream('documento.pdf');
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al generar el PDF: ' . $e->getMessage()]);
+        }
+        
+        // return $pdf->stream('documento.pdf');
+        //return [$inscripciones,$alumno];
+        
+    }   
+    
+>>>>>>> 6ee76df95e423020c5a9f49fd06e7d98df737a0c
     /*---------Funciones usadas para registroInscripcion--------------------*/
+   
     public function registroInscripcion()
     {
         return view('registroInscripcion');
     }
 
+<<<<<<< HEAD
     public function detallesPreRegistro()
     {
         return view('detallesPreRegistro');
     }
+=======
+
+
+>>>>>>> 6ee76df95e423020c5a9f49fd06e7d98df737a0c
 }

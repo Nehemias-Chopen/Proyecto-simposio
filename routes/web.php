@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlumnosController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PDFController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\SuveniresController;
 use App\Http\Controllers\SimposioController;
 use App\Http\Controllers\InscripcionController;
 use App\Http\Controllers\SeminaristaController;
+use App\Models\alumnos;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,7 +32,9 @@ Route::controller(PageController::class)->group(function (){
 
     /*---------Routes usados en el modulo de registroInscripcion-----------*/
     Route::get('/registroInscripcion',  'registroInscripcion')->name('registroInscripcion');
-});
+   
+    });
+    
 
 /*---------Routes usados en el modulo de preRegistro--------------------*/
 Route::get('/infoPreregistro/{no_boleta}', [InscripcionController::class, 'detalles'])->name('detallesPreRegistro');
@@ -79,4 +83,6 @@ route::get('/detallesPago', function(){
 });
 
 /*-----------Rutas usadas en el modulo crear pdf-------------------*/
-Route::get('/generarPDF', [PDFController::class, 'generarPDF'])->name('generarPDF');
+//Route::get('/generarPDF', [PDFController::class, 'generarPDF'])->name('generarPDF');
+Route::get('/facturacion', [PageController::class, 'facturacion'])->name('facturacion');
+Route::post('/verificar',[AlumnosController::class,'verificar'])->name('verificar');
