@@ -32,9 +32,15 @@ Route::controller(PageController::class)->group(function (){
 
     /*---------Routes usados en el modulo de registroInscripcion-----------*/
     Route::get('/registroInscripcion',  'registroInscripcion')->name('registroInscripcion');
-   
+    Route::get('/registroInscripcion/{boleta}',  'detallesPago')->name('detallesPago');
+    Route::get('/mensajeRegistro',  'mensajeRegistro')->name('mensajeRegistro');
+
     });
-    
+
+/*---------Routas usadas para el registro */
+Route::post('/registroInscripcion',[AlumnosController::class,'verificar'])->name('verificar');
+Route::put('/inscripciones/{inscripcion}', [AlumnosController::class, 'actualizar'])->name('actualizarInscripcion');
+
 
 /*---------Routes usados en el modulo de preRegistro--------------------*/
 Route::get('/infoPreregistro/{no_boleta}', [InscripcionController::class, 'detalles'])->name('detallesPreRegistro');
@@ -78,11 +84,7 @@ Route::put('/actualizarSeminarista/{seminarista}', [SeminaristaController::class
 Route::middleware('auth')->get('/comprobarBoleta', [SimposioController::class, 'select'])->name('comprobarBoleta');
 Route::middleware('auth')->post('/comprobarBoleta/{id}/inscribir', [SimposioController::class, 'inscribir'])->name('inscripciones.inscribir');
 
-route::get('/detallesPago', function(){
-    return view('detallesPago');
-});
 
 /*-----------Rutas usadas en el modulo crear pdf-------------------*/
 //Route::get('/generarPDF', [PDFController::class, 'generarPDF'])->name('generarPDF');
 Route::get('/facturacion', [PageController::class, 'facturacion'])->name('facturacion');
-Route::post('/verificar',[AlumnosController::class,'verificar'])->name('verificar');

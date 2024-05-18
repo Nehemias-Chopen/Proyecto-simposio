@@ -37,4 +37,5 @@ class InscripcionController extends Controller
 
         return view('detallesPreRegistro', compact('inscripcionvista', 'simposio', 'detalles'));
     }
+
 }

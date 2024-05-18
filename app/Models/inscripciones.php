@@ -26,6 +26,7 @@ class inscripciones extends Model
     protected $casts = [
         'total' => 'decimal:2',
     ];
+    protected $table = 'inscripciones';
 
     public function alumnos()
     {
