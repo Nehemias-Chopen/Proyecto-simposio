@@ -24,4 +24,9 @@ class suvenires extends Model
     protected $casts = [
         'precio' => 'decimal:2',
     ];
+
+    public function detalles_inscripcions()
+    {
+        return $this->hasMany(detalles_inscripcions::class, 'suvenir', 'codigo');
+    }
 }

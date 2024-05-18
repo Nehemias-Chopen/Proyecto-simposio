@@ -21,4 +21,8 @@ class alumnos extends Model
     public $incrementing = false;
 
     protected $keyType = 'string';
+    public function inscripciones()
+    {
+        return $this->hasMany(inscripciones::class, 'estudiante', 'carnet');
+    }
 }

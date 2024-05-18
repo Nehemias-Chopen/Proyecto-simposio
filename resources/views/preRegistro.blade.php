@@ -60,7 +60,8 @@
                                 @foreach ($suvenir as $suvenir)
                                     <div>
                                         <input type="checkbox" name="suvenir[]" class="accent-sky-900"
-                                            value="{{ $suvenir->codigo }}" data-costo="{{ $suvenir->precio }}">
+                                            value="{{ $suvenir->codigo }}" data-costo="{{ $suvenir->precio }}"
+                                            data-nombre="{{ $suvenir->nombre }}">
                                         <span class="font-bold">{{ $suvenir->nombre }}</span>
                                         <span>+ Q.{{ $suvenir->precio }}</span>
                                     </div>

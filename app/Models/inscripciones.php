@@ -26,4 +26,13 @@ class inscripciones extends Model
     protected $casts = [
         'total' => 'decimal:2',
     ];
+
+    public function alumnos()
+    {
+        return $this->belongsTo(alumnos::class, 'estudiante', 'carnet');
+    }
+    public function detalles_inscripcions()
+    {
+        return $this->hasMany(detalles_inscripcions::class, 'no_boleta', 'no_boleta');
+    }
 }

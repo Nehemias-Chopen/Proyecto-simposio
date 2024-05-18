@@ -6,45 +6,81 @@
             class="w-[90%] lg:w-[100%] m-auto flex flex-col gap-4 px-4 py-6 md:p-10 lg:p-12 shadow-md rounded-xl bg-white lg:m-16">
             <div>
                 <button
-                    class="border border-slate-800 py-2 px-3 rounded-full text-sm font-bold active:bg-slate-800 hover:bg-slate-500 hover:text-white"><a
-                        href="{{ route('moduloDisponible') }}">Volver</a></button>
+                    class="border border-slate-800 py-2 px-3 rounded-full text-sm font-bold active:bg-slate-800 hover:bg-slate-500 hover:text-white">
+                    <a href="{{ route('moduloDisponible') }}">Volver</a>
+                </button>
             </div>
             <h2 class="text-xl lg:text-2xl font-semibold text-center">Comprobacion de Boleta</h2>
-            <div class="max-w-[50rem] overflow-x-scroll overflow-y-scroll max-h-[35vh] lg:max-w-full overflow-hidden p-2">
-                <table class=" bg-slate-200 min-w-[28rem] w-full rounded-lg border border-slate-400 ">
+            <div class="max-w-[50rem] overflow-x-scroll max-h-[35vh] lg:max-w-full overflow-hidden p-2 relative">
+                <table class="bg-slate-200 min-w-[28rem] w-full rounded-lg border border-slate-400">
                     <thead>
                         <tr>
-                            <th class="p-2">Nombre</th>
-                            <th class="p-2">Carne</th>
+                            <th class="p-2">No Boleta</th>
+                            <th class="p-2">Estudiante</th>
                             <th class="p-2">Total</th>
                             <th class="p-2">Comprobante</th>
+                            <th class="p-2">Estado</th>
                             <th class="p-2">Telefono</th>
+                            <th class="p-2"> </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="border border-slate-400 hover:bg-slate-300">
-                            <td class="p-2 min-w-44">Alfonzo Paz Tumax</td>
-                            <td class="p-2 min-w-44">1490-18-4785</td>
-                            <td class="p-2 min-w-28">Q. 500.00</td>
-                            <td class="flex justify-center items-center p-2">
-                                <input type="checkbox" class="accent-sky-900" name="" id="">
-                            </td>
-                            <td class="p-2">44060691</td>
-                        </tr>
+                        @foreach ($inscripciones as $inscripciones)
+                            <tr class="border border-slate-400 hover:bg-slate-300">
+                                <td class="p-2 min-w-44">{{ $inscripciones->no_boleta }}</td>
+                                <td class="p-2 min-w-44">{{ $inscripciones->estudiante }}</td>
+                                <td class="p-2 min-w-44">{{ $inscripciones->total }}</td>
+                                <td class="p-2 min-w-44">
+                                    <a href="{{ asset($inscripciones->imagen) }}" target="_blank">
+                                        <img src="{{ asset($inscripciones->imagen) }}"
+                                            class="w-20 h-20 object-cover rounded" alt="Comprobante">
+                                    </a>
+                                </td>
+                                <td class="p-2 min-w-44">{{ $inscripciones->estado }}</td>
+                                <td class="p-2 min-w-44">
+                                    <a href="https://wa.me/{{ $inscripciones->alumnos->telefono }}" target="_blank"
+                                        class="text-blue-500 hover:underline">
+                                        {{ $inscripciones->alumnos->telefono }}
+                                    </a>
+                                </td>
+                                <td class="p-2 min-w-44">
+                                    @if ($inscripciones->estado !== 'Inscrito')
+                                        <form method="POST"
+                                            action="{{ route('inscripciones.inscribir', $inscripciones->no_boleta) }}"
+                                            onsubmit="return confirmUpdate()">
+                                            @csrf
+                                            <button type="submit"
+                                                class="py-2 px-2 rounded-full bg-green-500 text-white text-sm font-bold active:bg-yellow-600 hover:bg-yellow-400 hover:text-white">
+                                                <img src="{{ asset('/img/validacion.png') }}" class="w-5"
+                                                    alt="">
+                                            </button>
+                                        </form>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
             <div class="flex justify-center gap-1 pt-5 flex-col">
-                <h4 class="text-lg font-bold">Buscar Carne</h4>
+                <h4 class="text-lg font-bold">Buscar</h4>
                 <div class="flex items-center gap-2">
-                    <input type="text" placeholder="Carne"
-                        class="w-full lg:w-60 placeholder:text-sm focus:outline-none bg-slate-200 py-2 px-3 rounded-full">
-                    <button
-                        class="py-2 px-2 rounded-full bg-sky-900 text-white text-sm font-bold active:bg-sky-950 hover:bg-sky-700 hover:text-white">
-                        <img src="{{ asset('/img/lupa.png') }}" class="w-5" alt="">
-                    </button>
+                    <form method="GET" action="{{ route('comprobarBoleta') }}">
+                        <input type="text" placeholder="Buscar" name="search" value="{{ request('search') }}"
+                            class="w-full lg:w-60 placeholder:text-sm focus:outline-none bg-slate-200 py-2 px-3 rounded-full">
+                        <button
+                            class="py-2 px-2 rounded-full bg-sky-900 text-white text-sm font-bold active:bg-sky-950 hover:bg-sky-700 hover:text-white">
+                            <img src="{{ asset('/img/lupa.png') }}" class="w-5" alt="">
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function confirmUpdate() {
+            return confirm('¿Está seguro de que desea cambiar el estado a Inscrito?');
+        }
+    </script>
 @endsection

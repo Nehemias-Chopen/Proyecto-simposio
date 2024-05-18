@@ -6,6 +6,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SuveniresController;
 use App\Http\Controllers\SimposioController;
+use App\Http\Controllers\InscripcionController;
 use App\Http\Controllers\SeminaristaController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(PageController::class)->group(function (){
     Route::get('/', 'gestiones')->name('gestiones');
+
     /*---------Routes usados en el modulo de preRegistro--------------------*/
     Route::get('/preRegistro', 'preRegistro')->name('preRegistro');
     Route::post('/detallespreRegistro', 'register')->name('ingresarRegistro');
@@ -29,6 +31,9 @@ Route::controller(PageController::class)->group(function (){
     /*---------Routes usados en el modulo de registroInscripcion-----------*/
     Route::get('/registroInscripcion',  'registroInscripcion')->name('registroInscripcion');
 });
+
+/*---------Routes usados en el modulo de preRegistro--------------------*/
+Route::get('/infoPreregistro/{no_boleta}', [InscripcionController::class, 'detalles'])->name('detallesPreRegistro');
 
 /*---------Routes usados en el modulo de login--------------------*/
 Route::get('/login', [AuthController::class, 'index'])->name('admins');
@@ -66,7 +71,8 @@ Route::get('/actualizarSeminarista/{seminarista}', [SeminaristaController::class
 Route::put('/actualizarSeminarista/{seminarista}', [SeminaristaController::class, 'actualizar'])->name('actualizarSeminarista');
 
 /*-----------Rutas usadas en el modulo Comprobar Boletas-------------------*/
-Route::get('/comprobarBoleta', [AuthController::class, 'comprobarBoleta'])->name('comprobarBoleta');
+Route::middleware('auth')->get('/comprobarBoleta', [SimposioController::class, 'select'])->name('comprobarBoleta');
+Route::middleware('auth')->post('/comprobarBoleta/{id}/inscribir', [SimposioController::class, 'inscribir'])->name('inscripciones.inscribir');
 
 route::get('/detallesPago', function(){
     return view('detallesPago');
