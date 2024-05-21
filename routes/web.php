@@ -77,8 +77,9 @@ Route::get('/registroSeminarista', [AuthController::class, 'registroSeminarista'
 Route::middleware('auth')->get('/seminaristas', [SeminaristaController::class, 'select'])->name('seminaristas');
 Route::middleware('auth')->post('/registroSeminarista', [SeminaristaController::class, 'register'])->name('registroSeminarista');
 Route::delete('/seminaristas/{id_seminarista}', [SeminaristaController::class, 'eliminar'])->name('eliminarSeminarista');
-Route::get('/actualizarSeminarista/{seminarista}', [SeminaristaController::class, 'editar'])->name('editarSeminarista');
-Route::put('/actualizarSeminarista/{seminarista}', [SeminaristaController::class, 'actualizar'])->name('actualizarSeminarista');
+Route::middleware('auth')->get('/actualizarSeminarista/{seminarista}', [SeminaristaController::class, 'editar'])->name('editarSeminarista');
+Route::middleware('auth')->put('/actualizarSeminarista/{seminarista}', [SeminaristaController::class, 'actualizar'])->name('actualizarSeminarista');
+Route::middleware('auth')->get('/infoSeminarista/{seminarista}', [SeminaristaController::class, 'info'])->name('infoSeminarista');
 
 /*-----------Rutas usadas en el modulo Comprobar Boletas-------------------*/
 Route::middleware('auth')->get('/comprobarBoleta', [SimposioController::class, 'select'])->name('comprobarBoleta');

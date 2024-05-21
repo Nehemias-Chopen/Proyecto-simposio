@@ -37,7 +37,10 @@
                     <tbody>
                         @foreach ($seminarista as $seminarista)
                             <tr class="border border-slate-400 hover:bg-slate-300">
-                                <td class="p-2 min-w-44">{{ $seminarista->nombres }}, {{ $seminarista->apellidos }}</td>
+                                <td class="p-2 min-w-44"><a
+                                        href="{{ route('infoSeminarista', $seminarista->id_seminarista) }}">{{ $seminarista->nombres }},
+                                        {{ $seminarista->apellidos }}</a>
+                                </td>
                                 <td class="p-2 min-w-28">{{ $seminarista->tema }}</td>
                                 <td class="p-2 min-w-28">{{ $seminarista->viaticos }}</td>
                                 <td class="p-2">{{ $seminarista->telefono }}</td>

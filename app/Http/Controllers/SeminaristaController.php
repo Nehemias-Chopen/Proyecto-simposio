@@ -16,6 +16,7 @@ class SeminaristaController extends Controller
         if ($search) {
             $seminarista = Seminarista::where('nombres', 'like', "%$search%")
                         ->orWhere('apellidos', 'like', "%$search%")
+                        ->orWhere('tema', 'like', "%$search%")
                         ->get();
         } else {
             // Si no hay término de búsqueda, obtenemos todos los usuarios
@@ -71,6 +72,10 @@ class SeminaristaController extends Controller
         } else {
             return redirect()->route('seminaristas')->with('info', 'No se realizaron cambios');
         }
+    }
+
+    public function info(Seminarista $seminarista){
+        return view('hojaVidaSeminarista', ['seminarista' => $seminarista]);
     }
 
 }
