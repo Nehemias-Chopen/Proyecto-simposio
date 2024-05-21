@@ -6,8 +6,8 @@ use App\Models\alumnos;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
-use App\Models\Suvenires;
-use App\Models\Simposio;
+use App\Models\suvenires;
+use App\Models\simposio;
 use App\Models\inscripciones;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\PDFController;
@@ -33,8 +33,8 @@ class PageController extends Controller
     /*---------funciones usadas en preRegistro--------------------*/
     public function preRegistro()
     {
-        $suvenir = Suvenires::all();
-        $simposio = Simposio::all();
+        $suvenir = suvenires::all();
+        $simposio = simposio::all();
         return view('preRegistro',  compact('suvenir', 'simposio'));
     }
 
