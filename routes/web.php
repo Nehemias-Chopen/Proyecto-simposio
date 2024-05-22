@@ -43,13 +43,13 @@ Route::put('/inscripciones/{inscripcion}', [AlumnosController::class, 'actualiza
 
 
 /*---------Routes usados en el modulo de preRegistro--------------------*/
-Route::get('/infoPreregistro/{no_boleta}', [InscripcionController::class, 'detalles'])->name('detallesPreRegistro');
+Route::get('/infoPreregistro', [InscripcionController::class, 'detalles'])->name('detallesPreRegistro');
+Route::post('/infoPreregistro', [InscripcionController::class, 'imprimirBoleta'])->name('imprimirBoleta');
 
 /*---------Routes usados en el modulo de login--------------------*/
 Route::get('/login', [AuthController::class, 'index'])->name('admins');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/moduloDisponible', [AuthController::class, 'moduloDisponible'])->name('moduloDisponible');
-Route::get('/gestionEntradas', [AuthController::class, 'gestionEntradas'])->name('gestionEntradas');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 /*----------Routas usadas en el modulo de super usuario-----------*/
@@ -85,7 +85,9 @@ Route::middleware('auth')->get('/infoSeminarista/{seminarista}', [SeminaristaCon
 Route::middleware('auth')->get('/comprobarBoleta', [SimposioController::class, 'select'])->name('comprobarBoleta');
 Route::middleware('auth')->post('/comprobarBoleta/{id}/inscribir', [SimposioController::class, 'inscribir'])->name('inscripciones.inscribir');
 
+/*-----------Rutas usadas en el modulo Gestion de Entradas--------------- */
+Route::get('/gestionEntradas', [AuthController::class, 'gestionEntradas'])->name('gestionEntradas');
+Route::post('/Asistencia',[AlumnosController::class,'comprobarAsistencia'])->name('comprobarAsistencia');
 
 /*-----------Rutas usadas en el modulo crear pdf-------------------*/
-//Route::get('/generarPDF', [PDFController::class, 'generarPDF'])->name('generarPDF');
 Route::get('/facturacion', [PageController::class, 'facturacion'])->name('facturacion');

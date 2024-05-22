@@ -12,7 +12,7 @@
             <h1 class="text-xl lg:text-2xl font-semibold text-center"> Seleciona algun tipo de gestion</h1>
             <div class="flex flex-col justify-center items-center gap-4">
                 <h4 class="font-semibold text-center text-sm lg:text-base">
-                    Preregistro
+                    Pre Registro
                 </h4>
                 <button class="py-2 px-3 bg-sky-500 text-white font-medium rounded-full text-sm lg:text-base">
                     <a href="{{ route('preRegistro') }}"> siguiente </a>
@@ -20,7 +20,7 @@
             </div>
             <div class="flex flex-col justify-center items-center gap-4">
                 <h4 class="font-semibold text-center text-sm lg:text-base">
-                    Registro de de inscripcion
+                    Completar Registro
                 </h4>
                 <button class="py-2 px-3 bg-sky-500 text-white font-medium rounded-full text-sm lg:text-base">
                     <a href="{{ route('registroInscripcion') }}"> siguiente </a>

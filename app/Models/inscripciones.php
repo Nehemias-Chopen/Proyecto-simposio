@@ -36,4 +36,9 @@ class inscripciones extends Model
     {
         return $this->hasMany(detalles_inscripcions::class, 'no_boleta', 'no_boleta');
     }
+
+    public function asistencia_simposio()
+    {
+        return $this->hasMany(asistencia_simposio::class, 'no_boleta', 'no_boleta');
+    }
 }

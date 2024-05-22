@@ -6,6 +6,7 @@
     .btn-primary {
         @apply py-2 px-3 rounded-full bg-sky-900 text-white text-sm font-bold active:bg-sky-950 hover:bg-sky-700 hover:text-white;
     }
+
     .btn-secondary {
         @apply border border-slate-800 py-2 px-3 rounded-full text-sm font-bold active:bg-slate-800 hover:bg-slate-500 hover:text-white;
     }
@@ -16,5 +17,9 @@
 
     .size-floating-property {
         @apply w-[90%] md:w-[60%] m-auto flex justify-center items-center;
+    }
+
+    .alert {
+        @apply border-2 border-red-500 rounded-lg bg-red-500 text-white p-2.5;
     }
 }

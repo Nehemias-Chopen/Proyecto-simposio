@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('alumnos', function (Blueprint $table) {
             $table->string('carnet', 15)->primary();
             $table->string('nombre', 250);
+            $table->string('email', 250);
             $table->string('telefono', 15);
             $table->string('semestre', 50);
             $table->timestamps();

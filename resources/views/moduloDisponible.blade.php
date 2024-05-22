@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="flex gap-2 flex-col lg:flex-row pt-3 justify-between">
-                    <p class="flex  lg:items-center">Gestion de Entrada - PENDIENTE EN TRABAJAR</p>
+                    <p class="flex  lg:items-center">Gestion de Entrada </p>
                     <a href="{{ route('gestionEntradas') }}" class="btn-primary"> Siguiente </a>
                 </div>
                 <div class="flex gap-2 flex-col lg:flex-row pt-3 justify-between">

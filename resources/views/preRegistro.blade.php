@@ -10,6 +10,9 @@
                     @error('carnet')
                         {{ $message }}
                     @enderror
+                    @error('email')
+                        {{ $message }}
+                    @enderror
                 </div>
             </div>
             <form method="POST" action="{{ route('ingresarRegistro') }}">
@@ -18,12 +21,19 @@
                     <div class="flex">
                         <p class="hidden lg:w-20 lg:flex lg:items-center">Nombre</p>
                         <input type="text" placeholder="Nombre" name="nombre" required
+                            class="w-full lg:w-60 placeholder:text-sm focus:outline-none bg-slate-200 py-2 px-3 rounded-full"
+                            pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" title="No se permite numeros o simbolos">
+                    </div>
+                    <div class="flex">
+                        <p class="hidden lg:w-20 lg:flex lg:items-center">Correo</p>
+                        <input type="email" placeholder="Correo" name="email" required
                             class="w-full lg:w-60 placeholder:text-sm focus:outline-none bg-slate-200 py-2 px-3 rounded-full">
                     </div>
                     <div class="flex">
                         <p class="hidden lg:w-20 lg:flex lg:items-center">Carne</p>
                         <input type="text" placeholder="Carne" name="carnet" required
-                            class="w-full lg:w-60 placeholder:text-sm focus:outline-none bg-slate-200 py-2 px-3 rounded-full">
+                            class="w-full lg:w-60 placeholder:text-sm focus:outline-none bg-slate-200 py-2 px-3 rounded-full"
+                            pattern="^\d{4}-\d{2}-\d{1,5}$" title="Formato de carnet no valido">
                     </div>
                     <div class="flex">
                         <p class="hidden lg:w-20 lg:flex lg:items-center">Semestre</p>
@@ -32,7 +42,7 @@
                     </div>
                     <div class="flex">
                         <p class="hidden lg:w-20 lg:flex lg:items-center">Telefono</p>
-                        <input type="text" placeholder="Telefono" name="telefono" required
+                        <input type="tel" placeholder="Telefono" name="telefono" required
                             class="w-full lg:w-60 placeholder:text-sm focus:outline-none bg-slate-200 py-2 px-3 rounded-full">
                     </div>
                     @foreach ($simposio as $simposio)
@@ -121,9 +131,8 @@
                 class="border border-slate-800 py-2 px-3 rounded-full text-sm font-bold active:bg-slate-800 hover:bg-slate-500 hover:text-white"><a
                     href="{{ route('gestiones') }}">anterior</a></button>
             <button
-                class="py-2 px-3 rounded-full bg-sky-900 text-white text-sm font-bold active:bg-sky-950 hover:bg-sky-700 hover:text-white"
-                >siguente</a></button> 
-            </div>
+                class="py-2 px-3 rounded-full bg-sky-900 text-white text-sm font-bold active:bg-sky-950 hover:bg-sky-700 hover:text-white">siguente</a></button>
+        </div>
     </div>
     </form>
     </div>

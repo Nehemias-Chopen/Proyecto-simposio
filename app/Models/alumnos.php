@@ -12,6 +12,7 @@ class alumnos extends Model
     protected $fillable = [
         'carnet',
         'nombre',
+        'email',
         'telefono',
         'semestre',
     ];
@@ -24,5 +25,9 @@ class alumnos extends Model
     public function inscripciones()
     {
         return $this->hasMany(inscripciones::class, 'estudiante', 'carnet');
+    }
+    public function asistencia_simposio()
+    {
+        return $this->hasMany(asistencia_simposio::class, 'carnet', 'carnet');
     }
 }

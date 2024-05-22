@@ -81,4 +81,35 @@ class AlumnosController extends Controller
             return redirect()->route('actualizarInscripcion')->with('info', 'No se realizaron cambios');
         }
     }
+
+    //funcion ussada para el modulo Gestionar entradas//
+    public function comprobarAsistencia(Request $request)
+    {
+         // Validar los datos del formulario
+         $request->validate([
+            'comprobar' => 'required',
+        ]);
+
+        // Buscar en la base de datos
+        $comprobar = $request->input('comprobar');
+
+        $asistencia = inscripciones::where(function($query) use ($comprobar) {
+            $query->where('estudiante', $comprobar)
+                  ->orWhere('no_boleta', $comprobar);
+        })
+        ->where('estado', 'Inscrito')
+        ->first();
+
+            if (!$asistencia) {
+                // Si no se encuentran los datos, redirigir de vuelta con un mensaje de error
+                return redirect()->back()->with('error', 'No se encontro ningun resultado o no esta Inscrito.');
+            } else {
+            // El carné no existe en la base de datos
+            $inscripciones = inscripciones::with('alumnos')->where('no_boleta', $comprobar)
+            ->orWhere('estudiante', $comprobar)->get();
+            return view(('detallesPago'), compact('inscripciones'));
+
+        }
+
+    }
 }
