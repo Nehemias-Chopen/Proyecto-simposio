@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\simposio;
+use Illuminate\Support\Facades\Mail;
+use App\Models\Simposio;
 use App\Models\inscripciones;
 use App\Models\alumnos;
 use App\Models\detalles_inscripcions;
 use App\Models\suvenires;
+use App\Mail\ConfirmarInscripcionMailable;
 
 class SimposioController extends Controller
 {
@@ -56,9 +58,17 @@ class SimposioController extends Controller
 
     public function inscribir($id)
     {
-        $inscripcion = inscripciones::findOrFail($id);
-        $inscripcion->estado = 'Inscrito';
-        $inscripcion->save();
+        $alumno = alumnos::where('carnet', $id)->get();
+        foreach ($alumno as $alumno) {
+                Mail::to($alumno->email)->send(new ConfirmarInscripcionMailable($alumno));
+        }
+
+        $ins = inscripciones::where('estudiante', $id)->get();
+        foreach ($ins as $ins){
+            $inscripcion = inscripciones::findOrFail($ins->no_boleta);
+            $inscripcion->estado = 'Inscrito';
+            $inscripcion->save();
+        }
 
         return redirect()->back()->with('success', 'El estado de la inscripción ha sido actualizado a Inscrito.');
     }

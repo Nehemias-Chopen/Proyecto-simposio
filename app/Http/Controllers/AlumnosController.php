@@ -1,11 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\inscripciones;
+use App\Models\alumnos;
+use App\Models\Simposio;
 use App\Models\asistencia_simposios;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+
+use App\Mail\ConfirmacionRegistroMailable;
 
 class AlumnosController extends Controller
 {
@@ -28,7 +32,7 @@ class AlumnosController extends Controller
 
     if (!$inscripcion) {
         // Si no se encuentran los datos, redirigir de vuelta con un mensaje de error
-        return redirect()->back()->with('error', 'No se ha pre-Registrado.');
+        return redirect()->back()->with('error', 'Datos incorrectos o no esta Pre-Registrado.');
     } else {
         // Verificar el estado del registro
         switch ($inscripcion->estado) {
@@ -87,9 +91,18 @@ class AlumnosController extends Controller
 
     // Agregar el campo 'estado' al array validado
     $validated['estado'] = 'Registrado';
+    $carnet = $request->input('carnet');
 
     // Actualizar los datos de la inscripción
     if (!empty($validated)) {
+
+        $alumno = alumnos::where('carnet', $carnet)->get();
+        foreach ($alumno as $alumno) {
+
+            Mail::to($alumno->email)->send(new ConfirmacionRegistroMailable($alumno));
+        }
+
+        // Mostrar mensaje al finalizar Registro//
         $inscripcion->update($validated);
             return view('mensajeRegistro');
         } else {

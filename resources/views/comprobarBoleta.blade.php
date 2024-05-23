@@ -11,17 +11,17 @@
                 </button>
             </div>
             <h2 class="text-xl lg:text-2xl font-semibold text-center">Comprobacion de Boleta</h2>
-            <div class="max-w-[50rem] overflow-x-scroll max-h-[35vh] lg:max-w-full overflow-hidden p-2 relative">
+            <div class="max-w-[50rem] overflow-x-auto overflow-y-auto max-h-[35vh] lg:max-w-full p-2 relative">
                 <table class="bg-slate-200 min-w-[28rem] w-full rounded-lg border border-slate-400">
-                    <thead>
+                    <thead class="sticky top-0 bg-white z-10">
                         <tr>
-                            <th class="p-2">No Boleta</th>
-                            <th class="p-2">Estudiante</th>
-                            <th class="p-2">Total</th>
-                            <th class="p-2">Comprobante</th>
-                            <th class="p-2">Estado</th>
-                            <th class="p-2">Telefono</th>
-                            <th class="p-2">Confirmar </th>
+                            <th class="p-2 border-b">No Boleta</th>
+                            <th class="p-2 border-b">Estudiante</th>
+                            <th class="p-2 border-b">Total</th>
+                            <th class="p-2 border-b">Comprobante</th>
+                            <th class="p-2 border-b">Estado</th>
+                            <th class="p-2 border-b">Telefono</th>
+                            <th class="p-2 border-b">Confirmar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,7 +50,7 @@
                                 <td class="p-2 min-w-44 text-center">
                                     @if ($inscripciones->estado !== 'Inscrito')
                                         <form method="POST"
-                                            action="{{ route('inscripciones.inscribir', $inscripciones->no_boleta) }}"
+                                            action="{{ route('inscripciones.inscribir', $inscripciones->estudiante) }}"
                                             onsubmit="return confirmUpdate()">
                                             @csrf
                                             <script>

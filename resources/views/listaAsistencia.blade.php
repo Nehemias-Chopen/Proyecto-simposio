@@ -34,11 +34,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($asistencias as $asistencia)
+                        @foreach ($asistencias as $asistencias)
                             <tr class="border border-slate-400 hover:bg-slate-300">
-                                <td class="p-2 min-w-44 text-center">{{ $asistencia->no_boleta }}</td>
-                                <td class="p-2 min-w-44 text-center">{{ $asistencia->carnet }}</td>
-                                <td class="p-2 min-w-28 text-center">{{ $asistencia->nombre }}</td>
+                                <td class="p-2 min-w-44 text-center">{{ $asistencias->no_boleta }}</td>
+                                <td class="p-2 min-w-44 text-center">{{ $asistencias->carnet }}</td>
+                                <td class="p-2 min-w-28 text-center">{{ $asistencias->nombre }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -47,7 +47,7 @@
             <div class="flex justify-center gap-1 pt-5 flex-col">
                 <h4 class="text-lg font-bold">Buscar</h4>
                 <div class="flex items-center gap-2">
-                    <form method="GET" action="{{ route('listaAsistencia', $asistencia) }}">
+                    <form method="GET" action="{{ route('listaAsistencia', $asistencias) }}">
                         <input type="text" placeholder="Buscar" name="search" value="{{ request('search') }}"
                             class="w-full lg:w-60 placeholder:text-sm focus:outline-none bg-slate-200 py-2 px-3 rounded-full">
                         <button
