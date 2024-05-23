@@ -13,7 +13,7 @@ class SuveniresController extends Controller
 
         // Si hay un término de búsqueda, filtramos los usuarios
         if ($search) {
-            $suvenir = Suvenires::where('codigo', 'like', "%$search%")
+            $suvenir = Suvenires::where('codigo', "$search")
                         ->orWhere('nombre', 'like', "%$search%")
                         ->get();
         } else {

@@ -9,6 +9,11 @@
                     {{ session('error') }}
                 </div>
             @endif
+            @if (session('success'))
+                <div id="successMessage" class="bg-green-200 text-green-800 p-3 mb-4 rounded-md">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="pt-2">
                 <form method="POST" action="{{ route('comprobarAsistencia') }}">
                     @csrf

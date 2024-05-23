@@ -27,8 +27,12 @@
                     <tbody>
                         @foreach ($inscripciones as $inscripciones)
                             <tr class="border border-slate-400 hover:bg-slate-300">
-                                <td class="p-2 min-w-44 text-center">{{ $inscripciones->no_boleta }}</td>
-                                <td class="p-2 min-w-44 text-center">{{ $inscripciones->estudiante }}</td>
+                                <td class="p-2 min-w-44 text-center"><a
+                                        href="{{ route('detallesInscripcion', $inscripciones->no_boleta) }}">{{ $inscripciones->no_boleta }}</a>
+                                </td>
+                                <td class="p-2 min-w-44 text-center"><a
+                                        href="{{ route('detallesInscripcion', $inscripciones->no_boleta) }}">{{ $inscripciones->estudiante }}</a>
+                                </td>
                                 <td class="p-2 min-w-44 text-center">{{ $inscripciones->total }}</td>
                                 <td class="p-2 min-w-44 text-center">
                                     <a href="{{ asset($inscripciones->imagen) }}" target="_blank">

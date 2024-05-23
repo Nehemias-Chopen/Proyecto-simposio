@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\simposio;
 use App\Models\inscripciones;
+use App\Models\alumnos;
+use App\Models\detalles_inscripcions;
+use App\Models\suvenires;
 
 class SimposioController extends Controller
 {
@@ -59,4 +62,42 @@ class SimposioController extends Controller
 
         return redirect()->back()->with('success', 'El estado de la inscripción ha sido actualizado a Inscrito.');
     }
+
+    public function detalles($no_boleta)
+    {
+        // Obtener la inscripción basada en el número de boleta
+        $inscripciones = inscripciones::where('no_boleta', $no_boleta)->get();
+
+        // Crear un array para almacenar todos los detalles
+        $resultados = [];
+
+        // Iterar sobre cada inscripción
+        foreach ($inscripciones as $inscripcion) {
+            // Obtener los detalles del alumno basado en el carnet
+            $alumno = alumnos::where('carnet', $inscripcion->estudiante)->first();
+
+            $detallesInscripcion = detalles_inscripcions::where('no_boleta', $inscripcion->no_boleta)->get();
+
+            // Crear un array para almacenar los detalles del estudiante y suvenires
+            $detallesEstudiante = [
+                'inscripcion' => $inscripcion,
+                'alumno' => $alumno,
+                'suvenires' => []
+            ];
+
+            // Iterar sobre cada detalle de inscripción para obtener los suvenires asociados
+            foreach ($detallesInscripcion as $detalle) {
+                $suvenires = suvenires::where('codigo', $detalle->suvenir)->get();
+                // Añadir los suvenires al array de detalles del estudiante
+                $detallesEstudiante['suvenires'][] = $suvenires;
+            }
+
+            // Añadir los detalles del estudiante al array de resultados
+            $resultados[] = $detallesEstudiante;
+        }
+
+        // Retornar los resultados
+        return view('detalleInscripcion', compact('resultados'));
+    }
+
 }

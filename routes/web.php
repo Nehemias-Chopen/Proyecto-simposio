@@ -9,6 +9,7 @@ use App\Http\Controllers\SuveniresController;
 use App\Http\Controllers\SimposioController;
 use App\Http\Controllers\InscripcionController;
 use App\Http\Controllers\SeminaristaController;
+use App\Http\Controllers\AsistenciaSimposioController;
 use App\Models\alumnos;
 use Illuminate\Support\Facades\Route;
 
@@ -84,10 +85,15 @@ Route::middleware('auth')->get('/infoSeminarista/{seminarista}', [SeminaristaCon
 /*-----------Rutas usadas en el modulo Comprobar Boletas-------------------*/
 Route::middleware('auth')->get('/comprobarBoleta', [SimposioController::class, 'select'])->name('comprobarBoleta');
 Route::middleware('auth')->post('/comprobarBoleta/{id}/inscribir', [SimposioController::class, 'inscribir'])->name('inscripciones.inscribir');
+Route::middleware('auth')->get('/detalles/{no_boleta}', [SimposioController::class, 'detalles'])->name('detallesInscripcion');
+
+/*-----------Rutas usadas en el modulo asistencia-------------------------- */
+Route::middleware('auth')->get('/lista_aistencia', [AsistenciaSimposioController::class, 'select'])->name('listaAsistencia');
+Route::middleware('auth')->post('/asistenciaRegistro', [AsistenciaSimposioController::class, 'register'])->name('registroSuvenir');
 
 /*-----------Rutas usadas en el modulo Gestion de Entradas--------------- */
-Route::get('/gestionEntradas', [AuthController::class, 'gestionEntradas'])->name('gestionEntradas');
-Route::post('/Asistencia',[AlumnosController::class,'comprobarAsistencia'])->name('comprobarAsistencia');
+Route::middleware('auth')->get('/gestionEntradas', [AuthController::class, 'gestionEntradas'])->name('gestionEntradas');
+Route::middleware('auth')->post('/Asistencia',[AlumnosController::class,'comprobarAsistencia'])->name('comprobarAsistencia');
 
 /*-----------Rutas usadas en el modulo crear pdf-------------------*/
 Route::get('/facturacion', [PageController::class, 'facturacion'])->name('facturacion');

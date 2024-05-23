@@ -72,7 +72,7 @@
                             @endforeach
                             <tr class="border-t-2 border-t-double border-slate-400 hover:bg-slate-300 font-bold">
                                 <td class="p-2 min-w-44 text-right">Sub Total</td>
-                                <td class="p-2 min-w-44 text-center">Q.{{ $subtotal }} </td>
+                                <td class="p-2 min-w-44 text-center">Q. {{ $subtotal }} </td>
                                 <input type="hidden" name="subTotal" value="{{ $subtotal }}">
                             </tr>
                             <tr class="border-t-2 border-t-double border-slate-400 hover:bg-slate-300 font-bold">

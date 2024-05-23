@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('asistencia_simposio', function (Blueprint $table) {
+        Schema::create('asistencia_simposios', function (Blueprint $table) {
             $table->id();
             $table->string('carnet', 100);
             $table->string('nombre', 250);
@@ -29,10 +29,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('asistencia_simposio', function (Blueprint $table) {
+        Schema::table('asistencia_simposios', function (Blueprint $table) {
             $table->dropForeign(['carnet']);
             $table->dropForeign(['no_boleta']);
         });
-        Schema::dropIfExists('asistencia_simposio');
+        Schema::dropIfExists('asistencia_simposios');
     }
 };

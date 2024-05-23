@@ -26,7 +26,7 @@ class InscripcionController extends Controller
         $simposio = session('simposio');
 
         // Verificar que los datos existen en la sesión
-        if (!$alumno || !$optener || !$detalles || !$subtotal || !$simposio) {
+        if (!$alumno || !$optener || !$simposio) {
             return redirect()->route('preRegistro')->withErrors('No se encontraron los detalles.');
         }
 

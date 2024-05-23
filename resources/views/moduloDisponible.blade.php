@@ -24,11 +24,15 @@
                 </div>
 
                 <div class="flex gap-2 flex-col lg:flex-row pt-3 justify-between">
-                    <p class="flex  lg:items-center">Gestion de Entrada </p>
+                    <p class="flex  lg:items-center">Gestion de Entrada - falta terminar</p>
                     <a href="{{ route('gestionEntradas') }}" class="btn-primary"> Siguiente </a>
                 </div>
                 <div class="flex gap-2 flex-col lg:flex-row pt-3 justify-between">
-                    <p class="flex lg:items-center">Comprobacion de Boletos</p>
+                    <p class="flex lg:items-center">Lista de Asistencia</p>
+                    <a href="{{ route('listaAsistencia') }}" class="btn-primary"> Siguiente </a>
+                </div>
+                <div class="flex gap-2 flex-col lg:flex-row pt-3 justify-between">
+                    <p class="flex lg:items-center">Comprobacion de Boletas</p>
                     <a href="{{ route('comprobarBoleta') }}" class="btn-primary"> Siguiente </a>
                 </div>
                 <div class="flex gap-2 flex-col lg:flex-row pt-3 justify-between">

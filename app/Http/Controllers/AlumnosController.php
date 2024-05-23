@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\inscripciones;
+use App\Models\asistencia_simposios;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -10,32 +11,46 @@ class AlumnosController extends Controller
 {
 
     public function verificar(Request $request)
-    {
-         // Validar los datos del formulario
-         $request->validate([
-            'carnet' => 'required',
-            'boleta' => 'required',
-        ]);
+{
+    // Validar los datos del formulario
+    $request->validate([
+        'carnet' => 'required',
+        'boleta' => 'required',
+    ]);
 
-        // Buscar en la base de datos
-        $carnet = $request->input('carnet');
-        $boleta = $request->input('boleta');
+    // Buscar en la base de datos
+    $carnet = $request->input('carnet');
+    $boleta = $request->input('boleta');
 
-        $inscripcion = inscripciones::where('estudiante', $carnet)
-                                  ->where('no_boleta', $boleta)
-                                  ->first();
+    $inscripcion = inscripciones::where('estudiante', $carnet)
+                                ->where('no_boleta', $boleta)
+                                ->first();
 
-            if (!$inscripcion) {
-                // Si no se encuentran los datos, redirigir de vuelta con un mensaje de error
-                return redirect()->back()->with('error', 'No se a pre-Registrado.');
-            } else {
-            // El carné no existe en la base de datos
-            $inscripciones = inscripciones::with('alumnos')->where('no_boleta', 'like', "%$boleta%")->get();
-            return view(('detallesPago'), compact('inscripciones'));
-
+    if (!$inscripcion) {
+        // Si no se encuentran los datos, redirigir de vuelta con un mensaje de error
+        return redirect()->back()->with('error', 'No se ha pre-Registrado.');
+    } else {
+        // Verificar el estado del registro
+        switch ($inscripcion->estado) {
+            case 'Registrado':
+                // Si el estado es 'Registrado', mostrar un mensaje de espera
+                return redirect()->back()->with('error', 'Espere a que se valide su inscripción.');
+            case 'Inscrito':
+                // Si el estado es 'Inscrito', mostrar un mensaje de ya inscrito
+                return redirect()->back()->with('error', 'Ya está Inscrito.');
+            case 'Pre-Registro':
+                // Si el estado es 'Pre-Registro', proceder con el proceso
+                $inscripciones = inscripciones::with('alumnos')
+                    ->where('no_boleta', "$boleta")
+                    ->get();
+                return view('detallesPago', compact('inscripciones'));
+            default:
+                // Si el estado no coincide con ninguno de los anteriores
+                return redirect()->back()->with('error', 'Estado desconocido.');
         }
-
     }
+}
+
 
     public function actualizar(Request $request, Inscripciones $inscripcion)
     {
@@ -85,31 +100,46 @@ class AlumnosController extends Controller
     //funcion ussada para el modulo Gestionar entradas//
     public function comprobarAsistencia(Request $request)
     {
-         // Validar los datos del formulario
-         $request->validate([
+        // Validar los datos del formulario
+        $request->validate([
             'comprobar' => 'required',
         ]);
 
         // Buscar en la base de datos
         $comprobar = $request->input('comprobar');
 
+        // Verificar en la tabla inscripciones
         $asistencia = inscripciones::where(function($query) use ($comprobar) {
-            $query->where('estudiante', $comprobar)
+            $query->where('estudiante', 'like', "%$comprobar%")
                   ->orWhere('no_boleta', $comprobar);
         })
         ->where('estado', 'Inscrito')
         ->first();
 
-            if (!$asistencia) {
-                // Si no se encuentran los datos, redirigir de vuelta con un mensaje de error
-                return redirect()->back()->with('error', 'No se encontro ningun resultado o no esta Inscrito.');
-            } else {
-            // El carné no existe en la base de datos
-            $inscripciones = inscripciones::with('alumnos')->where('no_boleta', $comprobar)
-            ->orWhere('estudiante', $comprobar)->get();
-            return view(('detallesPago'), compact('inscripciones'));
+        if (!$asistencia) {
+            // Si no se encuentran los datos, redirigir de vuelta con un mensaje de error
+            return redirect()->back()->with('error', 'No está Inscrito.');
+        } else {
+            // Verificar en la tabla asistencia_simposios
+            $registroExistente = asistencia_simposios::where(function($query) use ($comprobar) {
+                $query->where('carnet', 'like', "%$comprobar%")
+                      ->orWhere('no_boleta', $comprobar);
+            })
+            ->exists();
 
+            if ($registroExistente) {
+                // Si el registro ya existe en la tabla asistencia_simposios, redirigir de vuelta con un mensaje de error
+                return redirect()->back()->with('error', 'Ya se registro la asistencia de este estudiante.');
+            }
+
+            // Obtener inscripciones con relación a alumnos
+            $inscripciones = inscripciones::with('alumnos')->where(function($query) use ($comprobar) {
+                $query->where('no_boleta', $comprobar)
+                      ->orWhere('estudiante', 'like', "%$comprobar%");
+            })->get();
+
+            return view('asistencia', compact('inscripciones'));
         }
-
     }
+
 }
