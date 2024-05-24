@@ -5,7 +5,7 @@
         <div class="floating-background-property">
             <h2 class="text-xl lg:text-2xl font-semibold text-center">Asistencia</h2>
             @foreach ($inscripciones as $inscripcion)
-                <form method="POST" action="{{ route('confirmarAsistencia', $inscripcion->no_boleta) }}">
+                <form method="POST" action="{{ route('confirmarAsistencia') }}">
                     @csrf
                     <div class="flex flex-col gap-5">
                         <div class="flex">

@@ -90,6 +90,7 @@ Route::middleware('auth')->get('/detalles/{no_boleta}', [SimposioController::cla
 /*-----------Rutas usadas en el modulo asistencia-------------------------- */
 Route::middleware('auth')->get('/lista_aistencia', [AsistenciaSimposioController::class, 'select'])->name('listaAsistencia');
 Route::middleware('auth')->post('/asistenciaRegistro', [AsistenciaSimposioController::class, 'register'])->name('confirmarAsistencia');
+Route::middleware('auth')->get('/entregar-certificados', [AsistenciaSimposioController::class, 'entregaCertificado'])->name('entregaCertificado');
 
 /*-----------Rutas usadas en el modulo Gestion de Entradas--------------- */
 Route::middleware('auth')->get('/gestionEntradas', [AuthController::class, 'gestionEntradas'])->name('gestionEntradas');

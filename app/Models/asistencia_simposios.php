@@ -14,6 +14,7 @@ class asistencia_simposios extends Model
         'carnet',
         'nombre',
         'no_boleta',
+        'pdf',
     ];
 
     protected $primaryKey = 'id';

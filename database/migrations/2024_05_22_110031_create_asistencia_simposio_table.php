@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('carnet', 100);
             $table->string('nombre', 250);
             $table->unsignedBigInteger('no_boleta');
+            $table->string('pdf')->nullable();
             $table->timestamps();
 
             // Claves foráneas

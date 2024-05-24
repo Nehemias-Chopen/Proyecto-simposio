@@ -14,8 +14,9 @@
                 <div class="ml-auto">
                     <!-- Botón Registrar alineado a la derecha -->
                     <button
-                        class="border border-slate-800 py-2 px-3 rounded-full text-sm font-bold active:bg-slate-800 hover:bg-slate-500 hover:text-white"><a
-                            href="{{ route('ingresarSuvenir') }}">Correo</a></button>
+                        class="border border-slate-800 py-2 px-3 rounded-full text-sm font-bold active:bg-slate-800 hover:bg-slate-500 hover:text-white">
+                        <a href="{{ route('entregaCertificado') }}">Entregar Certificados</a>
+                    </button>
                 </div>
             </div>
             @if (session('success'))
@@ -31,14 +32,19 @@
                             <th class="p-2">No Boleta</th>
                             <th class="p-2">Carnet</th>
                             <th class="p-2">Nombre</th>
+                            <th class="p-2">Certificados</th> <!-- Agregamos una nueva columna para el PDF -->
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($asistencias as $asistencias)
+                        @foreach ($asistencias as $asistencia)
                             <tr class="border border-slate-400 hover:bg-slate-300">
-                                <td class="p-2 min-w-44 text-center">{{ $asistencias->no_boleta }}</td>
-                                <td class="p-2 min-w-44 text-center">{{ $asistencias->carnet }}</td>
-                                <td class="p-2 min-w-28 text-center">{{ $asistencias->nombre }}</td>
+                                <td class="p-2 min-w-44 text-center">{{ $asistencia->no_boleta }}</td>
+                                <td class="p-2 min-w-44 text-center">{{ $asistencia->carnet }}</td>
+                                <td class="p-2 min-w-28 text-center">{{ $asistencia->nombre }}</td>
+                                <td class="p-2 min-w-28 text-center">
+                                    <!-- Agregamos un enlace al nombre para descargar el PDF -->
+                                    <a href="{{ asset('pdf/' . $asistencia->pdf) }}" download>{{ $asistencia->pdf }}</a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -47,7 +53,7 @@
             <div class="flex justify-center gap-1 pt-5 flex-col">
                 <h4 class="text-lg font-bold">Buscar</h4>
                 <div class="flex items-center gap-2">
-                    <form method="GET" action="{{ route('listaAsistencia', $asistencias) }}">
+                    <form method="GET" action="{{ route('listaAsistencia', $asistencia) }}">
                         <input type="text" placeholder="Buscar" name="search" value="{{ request('search') }}"
                             class="w-full lg:w-60 placeholder:text-sm focus:outline-none bg-slate-200 py-2 px-3 rounded-full">
                         <button
